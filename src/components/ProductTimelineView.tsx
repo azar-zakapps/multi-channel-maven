@@ -16,9 +16,10 @@ const SAMPLE_PRODUCTS: Product[] = [
   { id: "P1", title: "Summer T-Shirt" },
   { id: "P2", title: "Denim Jeans" },
   { id: "P3", title: "Sneakers" },
+  { id: "P4", title: "Beach Hat" },
+  { id: "P5", title: "Sunglasses" },
 ];
 
-// Reuse the Campaign type from CampaignManager
 type Channel = "TikTok" | "Meta" | "TV" | "YouTube" | "Pinterest";
 
 interface Campaign {
@@ -29,20 +30,43 @@ interface Campaign {
   endDate: Date;
 }
 
+// Create sample campaigns with current dates
+const today = new Date();
 const SAMPLE_CAMPAIGNS: Campaign[] = [
   {
     id: "1",
-    name: "Summer Sale",
-    channels: ["TikTok", "Meta"],
-    startDate: new Date(2024, 5, 1),
-    endDate: new Date(2024, 5, 7),
+    name: "Summer Collection Launch",
+    channels: ["TikTok", "Meta", "YouTube"],
+    startDate: today,
+    endDate: addDays(today, 5),
   },
   {
     id: "2",
-    name: "Back to School",
-    channels: ["YouTube", "TV"],
-    startDate: new Date(2024, 5, 3),
-    endDate: new Date(2024, 5, 10),
+    name: "Flash Sale Weekend",
+    channels: ["Meta", "Pinterest"],
+    startDate: addDays(today, 2),
+    endDate: addDays(today, 4),
+  },
+  {
+    id: "3",
+    name: "Influencer Collaboration",
+    channels: ["TikTok", "YouTube"],
+    startDate: addDays(today, 1),
+    endDate: addDays(today, 3),
+  },
+  {
+    id: "4",
+    name: "End of Season Sale",
+    channels: ["TV", "Meta", "YouTube"],
+    startDate: addDays(today, 4),
+    endDate: addDays(today, 7),
+  },
+  {
+    id: "5",
+    name: "Back to School Special",
+    channels: ["Pinterest", "Meta", "TikTok"],
+    startDate: addDays(today, 3),
+    endDate: addDays(today, 6),
   },
 ];
 
