@@ -1,11 +1,11 @@
 
 import { Layout } from "@/components/Layout";
-import { Dashboard } from "@/components/Dashboard";
+import { CampaignManager } from "@/components/CampaignManager";
 
 const Index = () => {
   return (
     <Layout>
-      <Dashboard />
+      <CampaignManager />
     </Layout>
   );
 };
