@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { addDays, format, isSameDay } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -9,15 +8,60 @@ import { Calendar as CalendarIcon } from "lucide-react";
 
 interface Product {
   id: string;
+  articleId: string;
   title: string;
+  price: number;
+  weeksCover: number;
+  brand: string;
+  hierarchy: string;
 }
 
 const SAMPLE_PRODUCTS: Product[] = [
-  { id: "P1", title: "Summer T-Shirt" },
-  { id: "P2", title: "Denim Jeans" },
-  { id: "P3", title: "Sneakers" },
-  { id: "P4", title: "Beach Hat" },
-  { id: "P5", title: "Sunglasses" },
+  {
+    id: "P1",
+    articleId: "ART001",
+    title: "Summer T-Shirt",
+    price: 29.99,
+    weeksCover: 8.5,
+    brand: "SummerWear",
+    hierarchy: "Apparel > Tops > T-Shirts",
+  },
+  {
+    id: "P2",
+    articleId: "ART002",
+    title: "Denim Jeans",
+    price: 59.99,
+    weeksCover: 12.0,
+    brand: "DenimCo",
+    hierarchy: "Apparel > Bottoms > Jeans",
+  },
+  {
+    id: "P3",
+    articleId: "ART003",
+    title: "Sneakers",
+    price: 89.99,
+    weeksCover: 6.2,
+    brand: "SportFlex",
+    hierarchy: "Footwear > Athletic > Sneakers",
+  },
+  {
+    id: "P4",
+    articleId: "ART004",
+    title: "Beach Hat",
+    price: 24.99,
+    weeksCover: 4.8,
+    brand: "SummerWear",
+    hierarchy: "Accessories > Headwear > Hats",
+  },
+  {
+    id: "P5",
+    articleId: "ART005",
+    title: "Sunglasses",
+    price: 79.99,
+    weeksCover: 5.5,
+    brand: "VisionStyle",
+    hierarchy: "Accessories > Eyewear > Sunglasses",
+  },
 ];
 
 type Channel = "TikTok" | "Meta" | "TV" | "YouTube" | "Pinterest";
@@ -110,13 +154,18 @@ export const ProductTimelineView = () => {
         />
       </div>
 
-      <div className="border rounded-lg overflow-hidden">
+      <div className="border rounded-lg overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[200px]">Product</TableHead>
+              <TableHead className="w-[100px]">Article ID</TableHead>
+              <TableHead className="w-[200px]">Title</TableHead>
+              <TableHead className="w-[100px]">Price (GBP)</TableHead>
+              <TableHead className="w-[100px]">Weeks Cover</TableHead>
+              <TableHead className="w-[150px]">Brand</TableHead>
+              <TableHead className="w-[250px]">Hierarchy</TableHead>
               {dateRange.map((date) => (
-                <TableHead key={date.toISOString()} className="text-center">
+                <TableHead key={date.toISOString()} className="text-center min-w-[100px]">
                   {format(date, "MMM d")}
                 </TableHead>
               ))}
@@ -125,12 +174,12 @@ export const ProductTimelineView = () => {
           <TableBody>
             {SAMPLE_PRODUCTS.map((product) => (
               <TableRow key={product.id}>
-                <TableCell className="font-medium">
-                  <div>
-                    <div className="font-semibold">{product.title}</div>
-                    <div className="text-sm text-gray-500">#{product.id}</div>
-                  </div>
-                </TableCell>
+                <TableCell className="font-medium">{product.articleId}</TableCell>
+                <TableCell>{product.title}</TableCell>
+                <TableCell>£{product.price.toFixed(2)}</TableCell>
+                <TableCell>{product.weeksCover.toFixed(1)}</TableCell>
+                <TableCell>{product.brand}</TableCell>
+                <TableCell className="text-sm text-gray-600">{product.hierarchy}</TableCell>
                 {dateRange.map((date) => {
                   const campaigns = getCampaignsForDate(date);
                   return (
